@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+RSpec.shared_examples 'a valid parser' do
+  it 'allows to check if the file was parsed' do
+    expect(parser.parsed?).to eq(false)
+    parser.parse!
+    expect(parser.parsed?).to eq(true)
+  end
+end
+
 RSpec.describe LogsAnalyzer::Parser do
   let(:parser) { described_class.new(file_path) }
   subject { parser.parse! }
@@ -23,6 +31,8 @@ RSpec.describe LogsAnalyzer::Parser do
   context 'with an empty log file' do
     let(:file_path) { 'spec/fixtures/files/empty.log' }
 
+    it_behaves_like 'a valid parser'
+
     it do
       is_expected.to be_empty
     end
@@ -33,17 +43,19 @@ RSpec.describe LogsAnalyzer::Parser do
     let(:expected_result) do
       {
         '/home' => {
-          "111.222.333.444" => 1,
+          '111.222.333.444' => 1,
           total: 1,
           unique: 1
         },
         '/about' => {
-          "111.222.333.444" => 2,
+          '111.222.333.444' => 2,
           total: 2,
           unique: 1
         }
       }
     end
+
+    it_behaves_like 'a valid parser'
 
     it do
       is_expected.to eq(expected_result)
@@ -52,6 +64,8 @@ RSpec.describe LogsAnalyzer::Parser do
 
   context 'with a complex log file' do
     let(:file_path) { 'spec/fixtures/files/webserver.log' }
+
+    it_behaves_like 'a valid parser'
 
     it 'is expected to parse all pages' do
       expect(subject.keys.size).to eq(6)
