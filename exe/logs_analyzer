@@ -2,3 +2,16 @@
 # frozen_string_literal: true
 
 require 'logs_analyzer'
+
+file_path = ARGV[0]
+raise ArgumentError, 'Argument `file_path` is required.' unless file_path
+
+parser = LogsAnalyzer::Parser.new(file_path)
+parsed = parser.parse!
+formatter = LogsAnalyzer::Formatter.new(parsed)
+
+puts('## Total Visits Report ##')
+puts(formatter.total_report)
+puts("\n=======================\n\n")
+puts('## Unique Visits Report ##')
+puts(formatter.unique_report)
