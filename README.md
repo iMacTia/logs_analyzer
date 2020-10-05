@@ -1,6 +1,16 @@
 # LogsAnalyzer
 
-TODO: Write a nice intro
+#### LA-001
+As a user, I want to be able to see a report showing the list of visits to my website
+ordered from most page views to less page views.
+There should be 2 available reports: total visits and unique visits.
+
+Acceptance criteria:
+* Servers will generate hourly logs, each line showing the visited pages and the visitor ip address
+* A script should run against these logs to parse the required information and aggregate it by page and ip address
+* Results should be sorted in DESCENDING order
+* In the total visits report, every line of the log file should be counted towards the visited page
+* In the unique visits report, the same ip address visiting the same page should be counted only once
 
 ## Installation
 
