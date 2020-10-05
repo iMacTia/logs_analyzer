@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  minimum_coverage 100
+end
 
 require 'bundler/setup'
 require 'logs_analyzer'

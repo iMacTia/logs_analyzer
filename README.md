@@ -50,6 +50,14 @@ To test the executable script without installing the gem locally, use the follow
 ruby -Ilib exe/logs_analyzer spec/fixtures/files/webserver.log
 ```
 
+## Code Quality
+
+Code quality is assured by the combination of the following:
+
+* Simplecov: runs automatically with rspec and enforces 100% coverage
+* Rubocop: ensures the code style is correct in all files
+* Inch: ensures documentation is good in all files
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/iMacTia/logs_analyzer.
