@@ -6,12 +6,30 @@ module LogsAnalyzer
   #
   # @example
   #   result = parser.parse!
-  #   formatted = LogsAnalyzer.format(result)
-  #
+  #   formatter = LogsAnalyzer::Formatter.new(result)
+  #   report = formatter.total_report
   class Formatter
-    # Helper class method to save on the instantiation
-    # # @param parsed [Hash] the logs info parsed by `LogAnalyzer::Parser`
-    def self.format(parsed)
+    # Initializes a new formatter with the parsed hash from a parser
+    # @param parsed [Hash] the logs info parsed by a `LogAnalyzer::Parser`
+    def initialize(parsed)
+      @parsed = parsed
+    end
+
+    # Returns a report with the total visits per page, in CSV format
+    # @return [String] the report in CSV format
+    def total_report
+      ''
+    end
+
+    # Returns a report with the total visits per page, in CSV format
+    # @return [String] the report in CSV format
+    def unique_report
+      ''
+    end
+
+    private
+
+    def format_visits(key)
       ''
     end
   end
