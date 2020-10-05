@@ -16,7 +16,7 @@ RSpec.describe LogsAnalyzer::Parser do
     let(:file_path) { 'spec/fixtures/files/invalid.log' }
 
     it do
-      expect { subject }.to raise_error(LogsAnalyzer::ParseError)
+      expect { subject }.to raise_error(LogsAnalyzer::ParseError, 'Invalid line: 0.')
     end
   end
 
@@ -33,10 +33,12 @@ RSpec.describe LogsAnalyzer::Parser do
     let(:expected_result) do
       {
         '/home' => {
+          "111.222.333.444" => 1,
           total: 1,
           unique: 1
         },
         '/about' => {
+          "111.222.333.444" => 2,
           total: 2,
           unique: 1
         }
@@ -56,12 +58,12 @@ RSpec.describe LogsAnalyzer::Parser do
     end
 
     it 'is expected to count correctly visits' do
-      sum = subject.values.map { |_, v| v[:total] }
+      sum = subject.values.map { |v| v[:total] }.sum
       expect(sum).to eq(500)
     end
 
     it 'is expected to count correctly unique visits' do
-      sum = subject.values.map { |_, v| v[:unique] }
+      sum = subject.values.map { |v| v[:unique] }.sum
       expect(sum).to eq(135)
     end
   end
